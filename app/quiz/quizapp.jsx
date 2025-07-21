@@ -1,103 +1,105 @@
-'use client';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+'use client'
 
-const questions = [
-  {
-    question: "What do you mostly search for?",
-    options: [
-      { text: "Best food nearby", value: "foodie" },
-      { text: "Quick help & repairs", value: "fixer" },
-      { text: "Travel or hotels", value: "explorer" }, // Index 2
-      { text: "Everything random", value: "curious" },
-    ],
-  },
-  {
-    question: "When do you usually need answers?",
-    options: [
-      { text: "Late at night", value: "fixer" },
-      { text: "On weekends", value: "explorer" },
-      { text: "During lunch", value: "foodie" }, // Index 2
-      { text: "Anytime", value: "curious" },
-    ],
-  },
-  {
-    question: "How do you describe your search style?",
-    options: [
-      { text: "I want fast results", value: "fixer" },
-      { text: "I love discovering new places", value: "explorer" },
-      { text: "I try all food deals!", value: "foodie" }, // Index 2
-      { text: "I ask anything anytime", value: "curious" },
-    ],
-  },
-];
+import React, { useState } from "react";
+import questions from "./questions";
+import {
+  WhatsappShareButton,
+  WhatsappIcon,
+  InstagramIcon,
+  InstagramShareButton,
+  FacebookShareButton,
+  FacebookIcon,
+  LinkedinShareButton,
+  LinkedinIcon
+} from "react-share";
 
-const results = {
-  foodie: {
-    title: "The Foodie Scout 🍲",
-    desc: "You’re always on the lookout for the yummiest spots. Bino is your food finding friend!",
-  },
-  fixer: {
-    title: "The Fast Fixer 🛠️",
-    desc: "You want all the solutions, fast. Bino knows just the right person for any job.",
-  },
-  explorer: {
-    title: "The Fun Explorer 🧳",
-    desc: "Ready for the next adventure! Bino gets your travel, hotels or event plans sorted.",
-  },
-  curious: {
-    title: "The Curious Cat 😺",
-    desc: "No question too weird for you! Bino is ready for your wildest searches.",
-  },
-};
-
-export default function BinoQuiz() {
+const App = () => {
   const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState([]);
-  const router = useRouter();
+  const [score, setScore] = useState(0);
+  const [start, setStart] = useState(false);
 
-  const handleOptionClick = (value) => {
-    // If user selects third option (index 2), show alert and redirect
-    if (step === 2) {
-      alert("Thanks for your interest! Redirecting you to the Bino homepage...");
-      router.push('/');
-      return;
+  const handleStart = () => {
+    setStart(true);
+  };
+
+  const handleOptionClick = (option) => {
+    if (option === questions[step].answer) {
+      setScore(score + 1);
     }
 
-    setAnswers([...answers, value]);
-    if (step < questions.length - 1) {
+    if (step === questions.length - 1) {
+      alert("Thanks for completing the quiz! Redirecting to the Bino homepage...");
+      setStep(step + 1);
+    } else {
       setStep(step + 1);
     }
   };
 
-  if (step < questions.length) {
+  const handleRestart = () => {
+    setStep(0);
+    setScore(0);
+    setStart(false);
+  };
+
+  if (!start) {
     return (
-      <main style={{ maxWidth: 400, margin: "2rem auto", fontFamily: "sans-serif", padding: 24 }}>
-        <h1 style={{ fontWeight: 700, fontSize: 28 }}>Why You are use Bino?</h1>
-        <div style={{ margin: "2rem 0" }}>
-          <h2>{questions[step].question}</h2>
-          {questions[step].options.map((opt, i) => (
-            <button
-              key={i}
-              style={{
-                display: "block",
-                width: "100%",
-                padding: "1rem",
-                margin: "1rem 0",
-                borderRadius: 8,
-                border: "1px solid #ccc",
-                background: "#f9f9f9",
-                fontSize: 18,
-                cursor: "pointer",
-              }}
-              onClick={() => handleOptionClick(step)}
-            >
-              {opt.text}
-            </button>
-          ))}
+      <div className="quiz-container">
+        <div className="quiz-box">
+          <h1>Welcome to the Bino Awareness Quiz!</h1>
+          <p>Let's explore what Bino is and how it works.</p>
+          <button className="option-button" onClick={handleStart}>Start Quiz</button>
         </div>
-        <small>Step {step + 1} of {questions.length}</small>
-      </main>
+      </div>
     );
-  } 
-}
+  }
+
+  if (step === questions.length) {
+    return (
+      <div className="quiz-container">
+        <div className="quiz-box">
+          <h2>Quiz Completed!</h2>
+          <p>Your Score: {score} / {questions.length}</p>
+          <p>Ready to explore Bino?</p>
+          <button className="option-button" onClick={() => window.location.href = "https://bino.bot"}>
+            Visit Bino
+          </button>
+          <br /><br />
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+            <a href="https://api.whatsapp.com/send/?phone=919800081110&text=Hello%21-https%3A%2F%2Fbino.bot%2F&type=phone_number&app_absent=0" target="_blank">
+              <WhatsappIcon size={32} round />
+            </a>
+            <a href="https://www.linkedin.com/company/boni1/" target="_blank">
+              <LinkedinIcon size={32} round />
+            </a>
+             <a href="https://www.facebook.com/people/Bino/100083924344406/" target="_blank" >
+              <FacebookIcon size={32} round />
+            </a>
+          </div>
+          <br />
+          <button className="option-button" onClick={handleRestart}>Retake Quiz</button>
+          <button  className="option-button" onClick={() => window.location.href="/"}>Return Home</button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="quiz-container">
+      <div className="quiz-box">
+        <h2>Question {step + 1}</h2>
+        <p>{questions[step].question}</p>
+        {questions[step].options.map((option, idx) => (
+          <button
+            className="option-button"
+            key={idx}
+            onClick={() => handleOptionClick(option)}
+          >
+            {option}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default App;
