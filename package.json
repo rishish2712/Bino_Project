@@ -13,12 +13,10 @@
     "next": "15.4.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-share": "^5.2.2",
-    "tailwind": "^2.3.1"
+    "react-share": "^5.2.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
     "@types/node": "24.0.15",
     "@types/react": "19.1.8",
     "eslint": "^9",

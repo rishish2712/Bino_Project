@@ -1,5 +1,5 @@
 import React from 'react';
-import QuizApp from './quizapp';
+import QuizApp from './QuizApp';
 
 function App() {
   return (
