@@ -8,7 +8,7 @@ import {
   LinkedinIcon
 } from "react-share";
 
-const App = () => {
+const QuizApp = () => {
   const [step, setStep] = useState(0);
   const [score, setScore] = useState(0);
   const [start, setStart] = useState(false);
