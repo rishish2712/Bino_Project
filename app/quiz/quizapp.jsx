@@ -3,13 +3,8 @@
 import React, { useState } from "react";
 import questions from "./questions";
 import {
-  WhatsappShareButton,
   WhatsappIcon,
-  InstagramIcon,
-  InstagramShareButton,
-  FacebookShareButton,
   FacebookIcon,
-  LinkedinShareButton,
   LinkedinIcon
 } from "react-share";
 
@@ -102,4 +97,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default QuizApp;
