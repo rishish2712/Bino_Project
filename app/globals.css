@@ -11,25 +11,66 @@ body {
 .container {
   max-width: 800px;
   margin: 50px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  padding: 30px 40px;
+  background: linear-gradient(to right, #fefefe, #f0f8ff);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
+  animation: fadeIn 1s ease;
 }
 
-h1 {
-  font-size: 42px;
-  margin-bottom: 10px;
+h1.bino-title {
+  font-size: 48px;
+  margin-bottom: 15px;
   color: #0e4a7b;
+  font-weight: 700;
+  letter-spacing: 1px;
+  animation: slideDown 0.6s ease;
 }
 
-h3 {
-  font-size: 20px;
+h3.bino-subtitle {
+  font-size: 22px;
   font-weight: 500;
-  margin-bottom: 40px;
-  color: #555;
+  margin-bottom: 30px;
+  color: #444;
+  line-height: 1.6;
+  animation: fadeIn 1.2s ease;
 }
+
+.highlight {
+  color: #0e4a7b;
+  font-weight: bold;
+  text-decoration: underline dashed #0e4a7b;
+}
+
+.btn-chat {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 28px;
+  background-color: #0e4a7b;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-chat:hover {
+  background-color: #10568e;
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
 .chat-box {
   text-align: left;
@@ -94,15 +135,39 @@ h3 {
 }
 
 
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
 .share-button {
-  display:inline-block;
+  display: inline-block;
   background-color: #25d366;
-  color: rgb(255, 255, 255);
-  padding: 10px 6px;
+  color: #fff;
+  padding: 10px 20px;
   text-decoration: none;
   border-radius: 6px;
-  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 500;
 }
+
+.quiz-button {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 
 .quiz-container {
